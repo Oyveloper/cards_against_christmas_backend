@@ -2,6 +2,8 @@ package com.monsen.cards_against_christmas_backend.controller;
 
 import com.monsen.cards_against_christmas_backend.game.CACGameManager;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -19,16 +21,18 @@ public class GameInfoController {
     }
 
     @GetMapping("/gameExists")
-    public boolean gameExists(@RequestParam String id) {
-        return this.gameManager.doesGameExist(id);
+    public ResponseEntity<Boolean> gameExists(@RequestParam String id) {
+        return new ResponseEntity<>(this.gameManager.doesGameExist(id), HttpStatus.OK);
     }
 
     @PostMapping("/createGame")
-    public void createGame(@RequestParam String id) {
+    public ResponseEntity<?> createGame(@RequestParam String id) {
         if (this.gameManager.doesGameExist(id)) {
-            throw new IllegalStateException("Game already exxists");
+            return new ResponseEntity<>(HttpStatus.CONFLICT);
         }
         this.gameManager.addGame(id);
+
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
 }
