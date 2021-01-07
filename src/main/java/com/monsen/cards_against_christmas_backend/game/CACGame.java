@@ -18,17 +18,17 @@ public class CACGame {
         this.id = id;
     }
 
-    public void addPlayer(Player player) {
-        this.players.add(player);
-    }
-
     private void initializeDeck() {
         // Magic for creating the initial deck here
 
-        for(int i = 0; i < 100; i++) {
+        for (int i = 0; i < 100; i++) {
             this.deck.add(new Card("Card " + i, String.valueOf(i)));
             this.blackCardDeck.add(new BlackCard("Card ___" + i, String.valueOf(i), 1));
         }
+    }
+
+    public void addPlayer(Player player) {
+        this.players.add(player);
     }
 
     public Card drawCard() {
@@ -39,6 +39,21 @@ public class CACGame {
         return card;
     }
 
+    public void newRound() {
+        Player judge;
+        if (this.rounds.size() == 0) {
+            judge = this.players.get(0);
+        } else {
+            judge = this.players.get((
+                                         this.players.indexOf(
+                                             this.rounds.peek()
+                                                 .getJudge()) + 1) % this.players.size()
+            );
+        }
+        Round round = new Round(judge, this.drawBlackCard());
+        this.rounds.add(round);
+    }
+
     public BlackCard drawBlackCard() {
         int index = (new Random()).nextInt(this.deck.size());
 
@@ -46,23 +61,6 @@ public class CACGame {
         this.blackCardDeck.remove(index);
         return card;
     }
-
-    public void newRound() {
-        Player judge;
-        if (this.rounds.size() == 0) {
-            judge = this.players.get(0);
-        } else {
-            judge = this.players.get((
-                this.players.indexOf(
-                    this.rounds.peek().
-                        getJudge())
-                    + 1) % this.players.size()
-            );
-        }
-        Round round = new Round(judge, this.drawBlackCard());
-        this.rounds.add(round);
-    }
-
 
 
 }
