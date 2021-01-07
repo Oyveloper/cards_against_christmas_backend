@@ -1,6 +1,7 @@
 package com.monsen.cards_against_christmas_backend.game;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Random;
 import java.util.Stack;
@@ -52,6 +53,14 @@ public class CACGame {
         }
         Round round = new Round(judge, this.drawBlackCard());
         this.rounds.add(round);
+    }
+
+    public Collection<Round> getRounds() {
+        return new ArrayList<>(this.rounds);
+    }
+
+    public Round getCurrentRound() {
+        return this.rounds.lastElement();
     }
 
     public BlackCard drawBlackCard() {
