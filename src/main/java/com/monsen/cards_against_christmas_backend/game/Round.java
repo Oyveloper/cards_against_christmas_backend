@@ -5,14 +5,14 @@ import java.util.Map;
 
 public class Round {
 
-    private Player winner;
     private final Player judge;
-    private final BlackCard BlackCard;
+    private final BlackCard blackCard;
+    private Player winner;
     private Map<Player, Card> playedCards = new HashMap<>();
 
     public Round(Player judge, BlackCard blackCard) {
         this.judge = judge;
-        BlackCard = blackCard;
+        this.blackCard = blackCard;
     }
 
     public Player getWinner() {
@@ -23,22 +23,22 @@ public class Round {
         this.winner = this.getPlayerFromCard(card);
     }
 
-
-    public Player getJudge() {
-        return judge;
-    }
-
-    public com.monsen.cards_against_christmas_backend.game.BlackCard getBlackCard() {
-        return BlackCard;
-    }
-
     public Player getPlayerFromCard(Card card) {
         for (Player player : this.playedCards.keySet()) {
             if (this.playedCards.get(player).equals(card)) {
                 return player;
             }
         }
+
         return null;
+    }
+
+    public Player getJudge() {
+        return judge;
+    }
+
+    public com.monsen.cards_against_christmas_backend.game.BlackCard getBlackCard() {
+        return blackCard;
     }
 
     public Map<Player, Card> getPlayedCards() {

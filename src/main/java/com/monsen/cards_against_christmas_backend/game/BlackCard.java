@@ -1,6 +1,6 @@
 package com.monsen.cards_against_christmas_backend.game;
 
-public class BlackCard extends Card{
+public class BlackCard extends Card {
 
     private int numberMissing;
 
