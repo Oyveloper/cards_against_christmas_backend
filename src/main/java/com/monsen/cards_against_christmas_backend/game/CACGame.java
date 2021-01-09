@@ -60,7 +60,9 @@ public class CACGame {
     }
 
     public Round getCurrentRound() {
-        return this.rounds.lastElement();
+        return this.rounds.size() > 0
+                ? this.rounds.lastElement()
+                : null;
     }
 
     public BlackCard drawBlackCard() {
