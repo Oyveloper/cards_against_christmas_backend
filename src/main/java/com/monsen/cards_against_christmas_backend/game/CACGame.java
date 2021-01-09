@@ -71,5 +71,13 @@ public class CACGame {
         return card;
     }
 
+    public String getId() {
+        return id;
+    }
+
+    public List<Player> getPlayers() {
+        return players;
+    }
+
 
 }
