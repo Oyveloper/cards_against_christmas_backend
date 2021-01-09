@@ -1,4 +1,4 @@
-package com.monsen.cards_against_christmas_backend.controller;
+package com.monsen.cards_against_christmas_backend.web.controller;
 
 import com.monsen.cards_against_christmas_backend.game.CACGameManager;
 import org.springframework.beans.factory.annotation.Autowired;
