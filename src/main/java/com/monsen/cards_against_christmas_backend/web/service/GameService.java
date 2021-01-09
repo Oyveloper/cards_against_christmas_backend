@@ -1,8 +1,11 @@
 package com.monsen.cards_against_christmas_backend.web.service;
 
+import com.monsen.cards_against_christmas_backend.game.CACGame;
 import com.monsen.cards_against_christmas_backend.game.CACGameManager;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class GameService {
     private final CACGameManager manager;
 
@@ -29,6 +32,13 @@ public class GameService {
             throw new IllegalStateException("The game with this id already exists");
         }
         this.manager.addGame(gameId);
+    }
+
+    public CACGame getGame(String gameId) throws IllegalStateException {
+        if (!this.manager.doesGameExist(gameId)) {
+            throw new IllegalStateException("No such game exists");
+        }
+        return this.manager.getGame(gameId);
     }
 
 
