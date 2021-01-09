@@ -1,6 +1,7 @@
 package com.monsen.cards_against_christmas_backend.web.controller;
 
 import com.monsen.cards_against_christmas_backend.game.CACGame;
+import com.monsen.cards_against_christmas_backend.game.Player;
 import com.monsen.cards_against_christmas_backend.web.DTO.GameUpdateDTO;
 import com.monsen.cards_against_christmas_backend.web.DTO.Message;
 import com.monsen.cards_against_christmas_backend.web.service.GameService;
@@ -27,6 +28,7 @@ public class GamePlayController {
         Message<GameUpdateDTO> message = new Message<>();
         if (this.gameService.gameExists(gameId)) {
             CACGame game = gameService.getGame(gameId);
+            game.addPlayer(new Player(playerName));
             GameUpdateDTO gameUpdateDTO = new GameUpdateDTO(game);
             message.setData(gameUpdateDTO);
             message.setStatus("OK");
