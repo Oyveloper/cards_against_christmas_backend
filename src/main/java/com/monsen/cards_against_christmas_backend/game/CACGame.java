@@ -73,6 +73,19 @@ public class CACGame {
         return card;
     }
 
+    public List<Card> dealHand(int handSize) {
+        List<Card> hand = new ArrayList<>();
+        for (int i = 0; i < handSize; i++) {
+            hand.add(this.drawCard());
+        }
+
+        return hand;
+    }
+
+    public List<Card> dealHand() {
+        return this.dealHand(7);
+    }
+
     public String getId() {
         return id;
     }
