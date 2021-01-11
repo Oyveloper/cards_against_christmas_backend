@@ -28,7 +28,10 @@ public class CACGame {
         }
     }
 
-    public void addPlayer(Player player) {
+    public void addPlayer(Player player) throws IllegalStateException {
+        if (this.players.stream().anyMatch(p -> p.getName().equals((player.getName())))) {
+            throw new IllegalStateException("The player is already added");
+        }
         this.players.add(player);
     }
 
