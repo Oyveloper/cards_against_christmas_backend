@@ -32,7 +32,7 @@ public class GamePlayController {
     @SendTo("/topic/GameUpdate/{gameId}")
     public Message<GameUpdateDTO> joinGame(@DestinationVariable("gameId") String gameId, @RequestParam("playerName") String playerName) {
         Message<GameUpdateDTO> message = new Message<>();
-        if (this.gameService.gameExists(gameId)) {
+        try {
             CACGame game = gameService.getGame(gameId);
             Player player = new Player(playerName);
             game.addPlayer(player);
@@ -40,12 +40,11 @@ public class GamePlayController {
             message.setData(gameUpdateDTO);
             message.setStatus("OK");
             message.setExplanation("");
-        } else {
+
+        } catch (Exception e) {
             message.setStatus("Error");
             message.setExplanation("Something went wrong i guess");
         }
-
-        System.out.println(message);
 
         return message;
     }
@@ -57,4 +56,5 @@ public class GamePlayController {
         }
         return new ResponseEntity<>(new Message<>(this.gameService.drawHand(gameId), "OK", ""), HttpStatus.OK);
     }
+
 }
