@@ -1,6 +1,7 @@
 package com.monsen.cards_against_christmas_backend.game;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Random;
 import java.util.Stack;
@@ -27,7 +28,10 @@ public class CACGame {
         }
     }
 
-    public void addPlayer(Player player) {
+    public void addPlayer(Player player) throws IllegalStateException {
+        if (this.players.stream().anyMatch(p -> p.getName().equals((player.getName())))) {
+            throw new IllegalStateException("The player is already added");
+        }
         this.players.add(player);
     }
 
@@ -54,12 +58,43 @@ public class CACGame {
         this.rounds.add(round);
     }
 
+    public Collection<Round> getRounds() {
+        return new ArrayList<>(this.rounds);
+    }
+
+    public Round getCurrentRound() {
+        return this.rounds.size() > 0
+                ? this.rounds.lastElement()
+                : null;
+    }
+
     public BlackCard drawBlackCard() {
         int index = (new Random()).nextInt(this.deck.size());
 
         BlackCard card = this.blackCardDeck.get(index);
         this.blackCardDeck.remove(index);
         return card;
+    }
+
+    public List<Card> dealHand(int handSize) {
+        List<Card> hand = new ArrayList<>();
+        for (int i = 0; i < handSize; i++) {
+            hand.add(this.drawCard());
+        }
+
+        return hand;
+    }
+
+    public List<Card> dealHand() {
+        return this.dealHand(7);
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public List<Player> getPlayers() {
+        return players;
     }
 
 

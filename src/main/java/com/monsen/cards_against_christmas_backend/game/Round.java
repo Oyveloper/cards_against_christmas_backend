@@ -52,4 +52,12 @@ public class Round {
             throw new IllegalStateException("This player has already played a card this round");
         }
     }
+
+    public void setWinner(Player winner) {
+        this.winner = winner;
+    }
+
+    public void setPlayedCards(Map<Player, Card> playedCards) {
+        this.playedCards = playedCards;
+    }
 }
