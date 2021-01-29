@@ -3,7 +3,8 @@ package com.monsen.cards_against_christmas_backend.game;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 class CACGameTest {
 
@@ -26,8 +27,8 @@ class CACGameTest {
     @Test
     void newRound() {
         CACGame game = getGame();
-        game.addPlayer(new Player("p1"));
-        game.addPlayer(new Player("p2"));
+        game.addPlayer(new Player("p1", false));
+        game.addPlayer(new Player("p2", false));
 
         assertEquals(game.getRounds().size(), 0);
 

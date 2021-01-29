@@ -28,14 +28,13 @@ public class GameService {
 
     /**
      * Creates a new game managed by the GameManager
-     * @param gameId the id for the game you wish to create
+     *
+     * @return - the newly created game
      */
-    public void createGame(String gameId) {
-        if (this.manager.doesGameExist(gameId)) {
-            throw new IllegalStateException("The game with this id already exists");
-        }
-        this.manager.addGame(gameId);
+    public CACGame createGame() {
+        return this.manager.createGame();
     }
+
 
     public CACGame getGame(String gameId) throws IllegalStateException {
         if (!this.manager.doesGameExist(gameId)) {

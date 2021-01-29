@@ -1,5 +1,6 @@
 package com.monsen.cards_against_christmas_backend.web.controller;
 
+import com.monsen.cards_against_christmas_backend.game.CACGame;
 import com.monsen.cards_against_christmas_backend.game.Player;
 import com.monsen.cards_against_christmas_backend.web.DTO.Message;
 import com.monsen.cards_against_christmas_backend.web.service.GameService;
@@ -22,21 +23,16 @@ public class GameInfoController {
         this.gameService = gameService;
     }
 
-
-
     @GetMapping("/gameExists")
     public ResponseEntity<Message<Boolean>> gameExists(@RequestParam String gameId) {
         return new ResponseEntity<>(new Message<>(this.gameService.gameExists(gameId), "OK", ""), HttpStatus.OK);
     }
 
     @PostMapping("/createGame")
-    public ResponseEntity<Message<?>> createGame(@RequestParam String gameId) {
-        if (this.gameService.gameExists(gameId)) {
-            return new ResponseEntity<>(HttpStatus.CONFLICT);
-        }
-        this.gameService.createGame(gameId);
+    public ResponseEntity<Message<String>> createGame() {
+        CACGame game = this.gameService.createGame();
 
-        return new ResponseEntity<>(new Message<>(null, "OK", ""), HttpStatus.CREATED);
+        return new ResponseEntity<>(new Message<>(game.getId(), "OK", ""), HttpStatus.CREATED);
     }
 
     @GetMapping("/isPlayerNameTaken")

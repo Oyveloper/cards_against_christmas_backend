@@ -34,7 +34,8 @@ public class GamePlayController {
         Message<GameUpdateDTO> message = new Message<>();
         try {
             CACGame game = gameService.getGame(gameId);
-            Player player = new Player(playerName);
+            boolean isHost = game.getPlayers().size() == 0;
+            Player player = new Player(playerName, isHost);
             game.addPlayer(player);
             GameUpdateDTO gameUpdateDTO = new GameUpdateDTO(game);
             message.setData(gameUpdateDTO);
