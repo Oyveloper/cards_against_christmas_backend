@@ -1,31 +1,20 @@
 package com.monsen.cards_against_christmas_backend.game;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Random;
-import java.util.Stack;
+import com.monsen.cards_against_christmas_backend.data.entity.BlackCard;
+import com.monsen.cards_against_christmas_backend.data.entity.WhiteCard;
+
+import java.util.*;
 
 public class CACGame {
 
     private List<Player> players = new ArrayList<>();
-    private List<Card> deck = new ArrayList<>();
+    private List<WhiteCard> deck = new ArrayList<>();
     private List<BlackCard> blackCardDeck = new ArrayList<>();
     private Stack<Round> rounds = new Stack<>();
     private String id;
 
     public CACGame(String id) {
-        initializeDeck();
         this.id = id;
-    }
-
-    private void initializeDeck() {
-        // Magic for creating the initial deck here
-
-        for (int i = 0; i < 100; i++) {
-            this.deck.add(new Card("Card " + i, String.valueOf(i)));
-            this.blackCardDeck.add(new BlackCard("Card ___" + i, String.valueOf(i), 1));
-        }
     }
 
     public void addPlayer(Player player) throws IllegalStateException {
@@ -35,10 +24,10 @@ public class CACGame {
         this.players.add(player);
     }
 
-    public Card drawCard() {
+    public WhiteCard drawCard() {
         int index = (new Random()).nextInt(this.deck.size());
 
-        Card card = this.deck.get(index);
+        WhiteCard card = this.deck.get(index);
         this.deck.remove(index);
         return card;
     }
@@ -76,8 +65,8 @@ public class CACGame {
         return card;
     }
 
-    public List<Card> dealHand(int handSize) {
-        List<Card> hand = new ArrayList<>();
+    public List<WhiteCard> dealHand(int handSize) {
+        List<WhiteCard> hand = new ArrayList<>();
         for (int i = 0; i < handSize; i++) {
             hand.add(this.drawCard());
         }
@@ -85,7 +74,7 @@ public class CACGame {
         return hand;
     }
 
-    public List<Card> dealHand() {
+    public List<WhiteCard> dealHand() {
         return this.dealHand(7);
     }
 
@@ -95,6 +84,14 @@ public class CACGame {
 
     public List<Player> getPlayers() {
         return players;
+    }
+
+    public void setWhiteCardDeck(Collection<WhiteCard> deck) {
+        this.deck = new ArrayList<>(deck);
+    }
+
+    public void setBlackCardDeck(Collection<BlackCard> deck) {
+        this.blackCardDeck = new ArrayList<>(deck);
     }
 
 

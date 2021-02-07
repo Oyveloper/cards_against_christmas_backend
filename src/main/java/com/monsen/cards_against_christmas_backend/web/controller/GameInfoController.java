@@ -3,6 +3,7 @@ package com.monsen.cards_against_christmas_backend.web.controller;
 import com.monsen.cards_against_christmas_backend.game.CACGame;
 import com.monsen.cards_against_christmas_backend.game.Player;
 import com.monsen.cards_against_christmas_backend.web.DTO.Message;
+import com.monsen.cards_against_christmas_backend.web.service.CardService;
 import com.monsen.cards_against_christmas_backend.web.service.GameService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,12 +17,15 @@ import org.springframework.web.bind.annotation.RestController;
 public class GameInfoController {
 
     private final GameService gameService;
+    private final CardService cardService;
 
 
     @Autowired
-    public GameInfoController(GameService gameService) {
+    public GameInfoController(GameService gameService, CardService cardService) {
         this.gameService = gameService;
+        this.cardService = cardService;
     }
+
 
     @GetMapping("/gameExists")
     public ResponseEntity<Message<Boolean>> gameExists(@RequestParam String gameId) {
@@ -31,6 +35,8 @@ public class GameInfoController {
     @PostMapping("/createGame")
     public ResponseEntity<Message<String>> createGame() {
         CACGame game = this.gameService.createGame();
+        game.setWhiteCardDeck(cardService.getWhiteCardDeck());
+
 
         return new ResponseEntity<>(new Message<>(game.getId(), "OK", ""), HttpStatus.CREATED);
     }

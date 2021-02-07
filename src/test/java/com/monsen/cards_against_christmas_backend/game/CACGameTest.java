@@ -1,5 +1,6 @@
 package com.monsen.cards_against_christmas_backend.game;
 
+import com.monsen.cards_against_christmas_backend.data.entity.WhiteCard;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -16,8 +17,8 @@ class CACGameTest {
     void drawCard() {
         CACGame game = getGame();
 
-        Card card = game.drawCard();
-        Card card2 = game.drawCard();
+        WhiteCard card = game.drawCard();
+        WhiteCard card2 = game.drawCard();
 
         // Checking that the cards are not equal
         Assertions.assertNotEquals(card, card2);
