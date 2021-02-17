@@ -12,6 +12,7 @@ public class Round {
     private final BlackCard blackCard;
     private Player winner;
     private Map<Player, WhiteCard> playedCards = new HashMap<>();
+    private WhiteCard winnerCard;
 
     public Round(Player judge, BlackCard blackCard) {
         this.judge = judge;
@@ -28,6 +29,8 @@ public class Round {
 
     public void pickWinnerCard(WhiteCard card) {
         this.winner = this.getPlayerFromCard(card);
+        this.winner.increaseScore(100);
+        this.setWinnerCard(card);
     }
 
     public Player getPlayerFromCard(WhiteCard card) {
@@ -48,12 +51,25 @@ public class Round {
         return blackCard;
     }
 
-    public Map<Player, WhiteCard> getPlayedCards() {
-        return playedCards;
+    public Map<String, WhiteCard> getPlayedCards() {
+        Map<String, WhiteCard> result = new HashMap<>();
+        for (Player player : playedCards.keySet()) {
+            result.put(player.getName(), playedCards.get(player));
+        }
+
+        return result;
     }
 
     public void setPlayedCards(Map<Player, WhiteCard> playedCards) {
         this.playedCards = playedCards;
+    }
+
+    public WhiteCard getWinnerCard() {
+        return winnerCard;
+    }
+
+    public void setWinnerCard(WhiteCard winnerCard) {
+        this.winnerCard = winnerCard;
     }
 
     public void playCard(Player player, WhiteCard card) throws IllegalStateException {

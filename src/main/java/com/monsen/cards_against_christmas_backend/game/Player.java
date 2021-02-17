@@ -28,6 +28,10 @@ public class Player {
         this.score = score;
     }
 
+    public void increaseScore(int amount) {
+        this.score += amount;
+    }
+
     @JsonProperty("isHost")
     public boolean isHost() {
         return isHost;

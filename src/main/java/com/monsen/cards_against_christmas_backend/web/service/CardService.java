@@ -32,4 +32,12 @@ public class CardService {
         return StreamSupport.stream(this.blackCardRepository.findAll().spliterator(), false)
                 .collect(Collectors.toList());
     }
+
+    public WhiteCard getWhiteCardById(String id) {
+        return whiteCardRepository.findById(id).orElseThrow();
+    }
+
+    public BlackCard getBlackCardById(String id) {
+        return blackCardRepository.findById(id).orElseThrow();
+    }
 }

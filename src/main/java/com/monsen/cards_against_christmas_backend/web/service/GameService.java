@@ -51,5 +51,13 @@ public class GameService {
 
     }
 
+    public WhiteCard drawCard(String gameId) throws IllegalStateException {
+        if (!this.manager.doesGameExist(gameId)) {
+            throw new IllegalStateException("No such game exists");
+        }
+        return this.manager.getGame(gameId).drawCard();
+
+    }
+
 
 }

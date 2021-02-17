@@ -5,5 +5,5 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface WhiteCardRepository extends CrudRepository<WhiteCard, Integer> {
+public interface WhiteCardRepository extends CrudRepository<WhiteCard, String> {
 }

@@ -36,6 +36,7 @@ public class GameInfoController {
     public ResponseEntity<Message<String>> createGame() {
         CACGame game = this.gameService.createGame();
         game.setWhiteCardDeck(cardService.getWhiteCardDeck());
+        game.setBlackCardDeck(cardService.getBlackCardDeck());
 
 
         return new ResponseEntity<>(new Message<>(game.getId(), "OK", ""), HttpStatus.CREATED);

@@ -12,12 +12,14 @@ public class GameUpdateDTO {
     private List<Player> players;
     private List<Round> rounds;
     private Round currentRound;
+    private String type;
 
-    public GameUpdateDTO(CACGame game) {
+    public GameUpdateDTO(CACGame game, String type) {
         this.gameId = game.getId();
         this.players = game.getPlayers();
         this.rounds = new ArrayList<>(game.getRounds());
         this.currentRound = game.getCurrentRound();
+        this.type = type;
     }
 
     public String getGameId() {
@@ -50,6 +52,14 @@ public class GameUpdateDTO {
 
     public void setCurrentRound(Round currentRound) {
         this.currentRound = currentRound;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 }
 

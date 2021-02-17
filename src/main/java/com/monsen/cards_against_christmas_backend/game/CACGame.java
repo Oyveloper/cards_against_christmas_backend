@@ -75,7 +75,7 @@ public class CACGame {
     }
 
     public List<WhiteCard> dealHand() {
-        return this.dealHand(7);
+        return this.dealHand(4);
     }
 
     public String getId() {
@@ -92,6 +92,23 @@ public class CACGame {
 
     public void setBlackCardDeck(Collection<BlackCard> deck) {
         this.blackCardDeck = new ArrayList<>(deck);
+    }
+
+    public void addWhiteCardToDeck(WhiteCard card) {
+        this.deck.add(card);
+    }
+
+
+    /**
+     * Returns the player that has the given name, if any
+     *
+     * @param name - the name of the player you want
+     * @return The player with the given name
+     * @Throws NoSuchElementException
+     */
+    public Player getPlayerByName(String name) throws NoSuchElementException {
+        return this.players.stream().filter(p -> p.getName().equals(name)).findFirst().orElseThrow();
+
     }
 
 
