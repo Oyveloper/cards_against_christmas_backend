@@ -4,7 +4,7 @@ COPY ./pom.xml ./pom.xml
 RUN mvn dependency:go-offline -B
 COPY ./src ./src
 
-RUN mvn package && cp target/cards_against_christmas_backend-*.jar app.jar
+RUN mvn package && cp target/cards_against_christmas_backend-0.0.1-SNAPSHOT.jar app.jar
 
 # Rely on Docker's multi-stage build to get a smaller image based on JRE
 FROM openjdk:8-jre-alpine
