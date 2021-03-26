@@ -1,13 +1,13 @@
-FROM maven:3.6-jdk-8 as maven
-WORKDIR /cards_against_christmas_backend
+FROM maven:3.6-jdk-11 as maven
+WORKDIR /app
 COPY ./pom.xml ./pom.xml
 RUN mvn dependency:go-offline -B
 COPY ./src ./src
 
-RUN mvn package && cp target/cards_against_christmas_backend-0.0.1-SNAPSHOT.jar app.jar
+RUN mvn clean package && cp target/cards_against_christmas_backend-0.0.1-SNAPSHOT.jar app.jar
 
 # Rely on Docker's multi-stage build to get a smaller image based on JRE
-FROM openjdk:8-jre-alpine
+FROM adoptopenjdk/openjdk13:latest
 LABEL maintainer="yvind.monsen@gmail.com"
 WORKDIR /app
 COPY --from=maven /app/app.jar ./app.jar
