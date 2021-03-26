@@ -19,6 +19,7 @@ public class GameService {
 
     /**
      * Check wether a game with the given id exists already
+     *
      * @param gameId - the id you want to check
      * @return True if a game with 'gameId' exists
      */

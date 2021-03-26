@@ -38,9 +38,9 @@ public class CACGame {
             judge = this.players.get(0);
         } else {
             judge = this.players.get((
-                                         this.players.indexOf(
-                                             this.rounds.peek()
-                                                 .getJudge()) + 1) % this.players.size()
+                    this.players.indexOf(
+                            this.rounds.peek()
+                                    .getJudge()) + 1) % this.players.size()
             );
         }
         Round round = new Round(judge, this.drawBlackCard());
