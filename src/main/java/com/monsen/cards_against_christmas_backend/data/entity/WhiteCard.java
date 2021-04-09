@@ -1,19 +1,20 @@
 package com.monsen.cards_against_christmas_backend.data.entity;
 
-import javax.persistence.*;
 import java.util.Objects;
 
-@Entity
-@Table(name = "WHITE_CARDS")
 public class WhiteCard {
 
-    @Column(name = "text")
     private String text;
-
-    @Id
-    @Column(name = "white_card_id")
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private String id;
+
+    public WhiteCard() {
+    }
+
+
+    public WhiteCard(String id, String text) {
+        this.text = text;
+        this.id = id;
+    }
 
     public String getText() {
         return text;

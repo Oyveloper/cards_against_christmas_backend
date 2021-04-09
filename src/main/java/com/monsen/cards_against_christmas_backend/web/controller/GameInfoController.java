@@ -1,5 +1,6 @@
 package com.monsen.cards_against_christmas_backend.web.controller;
 
+import com.monsen.cards_against_christmas_backend.data.entity.WhiteCard;
 import com.monsen.cards_against_christmas_backend.game.CACGame;
 import com.monsen.cards_against_christmas_backend.game.Player;
 import com.monsen.cards_against_christmas_backend.web.DTO.Message;
@@ -12,6 +13,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.Collection;
 
 @RestController
 public class GameInfoController {
@@ -35,7 +38,11 @@ public class GameInfoController {
     @PostMapping("/createGame")
     public ResponseEntity<Message<String>> createGame() {
         CACGame game = this.gameService.createGame();
-        game.setWhiteCardDeck(cardService.getWhiteCardDeck());
+        Collection<WhiteCard> deck = cardService.getWhiteCardDeck();
+        deck.forEach(this.gameService::registerCard);
+
+
+        game.setWhiteCardDeck(deck);
         game.setBlackCardDeck(cardService.getBlackCardDeck());
 
 

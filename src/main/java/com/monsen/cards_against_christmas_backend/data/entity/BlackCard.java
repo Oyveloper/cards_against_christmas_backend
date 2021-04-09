@@ -1,23 +1,19 @@
 package com.monsen.cards_against_christmas_backend.data.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
-
-@Entity
-@Table(name = "BLACK_CARDS")
 public class BlackCard {
 
-    @Id
-    @Column(name = "black_card_id")
     private String id;
-
-    @Column(name = "text")
     private String text;
-
-    @Column(name = "number_of_blanks")
     private int numberOfBlanks;
+
+    public BlackCard() {
+    }
+
+    public BlackCard(String id, String text, int numberOfBlanks) {
+        this.id = id;
+        this.text = text;
+        this.numberOfBlanks = numberOfBlanks;
+    }
 
     public String getId() {
         return id;

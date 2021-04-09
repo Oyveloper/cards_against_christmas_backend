@@ -61,4 +61,7 @@ public class GameService {
     }
 
 
+    public void registerCard(WhiteCard card) {
+        this.manager.registerCard(card);
+    }
 }
